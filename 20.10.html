@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chúc Mừng Ngày 20/10 - Dành Tặng Hai & Mẹ</title>
+  <title>Chúc Mừng Ngày 20/10 - Dành Tặng Mẹ & Chị Yêu Thương ❤️</title>
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
               200: '#fecdd3',
               300: '#fda4af',
               400: '#fb7185',
-              50: '#f43f5e',
+              500: '#f43f5e',
               600: '#e11d48',
               700: '#be123c',
             }
@@ -54,13 +54,10 @@
   </script>
 
   <style>
-    /* Falling items container */
+    /* Falling petals & hearts */
     #petals-container {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
       z-index: 10;
       overflow: hidden;
@@ -74,149 +71,130 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(105vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
     }
 
     /* Glassmorphism */
     .glass-card {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 182, 193, 0.5);
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
+    /* Floating Pop Text (2.5s) */
+    .pop-text {
+      position: fixed;
+      pointer-events: none;
+      font-weight: bold;
+      font-size: 20px;
+      color: #e11d48;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 9999;
+      animation: popUpFade 2.5s forwards cubic-bezier(0.25, 1, 0.5, 1);
     }
-    ::-webkit-scrollbar-track {
-      background: #ffe4e6;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #fb7185;
-      border-radius: 4px;
+
+    @keyframes popUpFade {
+      0% { opacity: 0; transform: translateY(0) scale(0.5); }
+      20% { opacity: 1; transform: translateY(-30px) scale(1.1); }
+      80% { opacity: 1; transform: translateY(-70px) scale(1); }
+      100% { opacity: 0; transform: translateY(-100px) scale(0.8); }
     }
   </style>
 </head>
 <body class="bg-gradient-to-br from-pink-100 via-pink-200 to-rose-100 min-h-screen font-sans text-gray-800 relative overflow-x-hidden">
 
-  <!-- Floating Falling Petals / Hearts Container -->
+  <!-- Falling Petals / Hearts Container -->
   <div id="petals-container"></div>
 
   <!-- Music Control Button -->
-  <button id="musicToggleBtn" onclick="toggleAudio()" class="fixed top-5 right-5 z-50 bg-white/90 text-pink-500 hover:text-pink-600 p-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center gap-2 border border-pink-200 group">
-    <i id="musicIcon" class="fa-solid fa-music text-xl animate-spin" style="animation-duration: 4s;"></i>
-    <span id="musicText" class="text-xs font-bold text-pink-600 hidden group-hover:inline transition-all">Tắt Nhạc</span>
+  <button id="musicToggleBtn" onclick="toggleAudio()" class="fixed top-5 right-5 z-50 bg-white/90 text-pink-500 hover:text-pink-600 p-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center gap-2 border border-pink-200 group" title="Bật/Tắt nhạc">
+    <i id="musicIcon" class="fa-solid fa-music text-xl"></i>
+    <span id="musicText" class="text-xs font-bold text-pink-600 hidden group-hover:inline transition-all">Phát Nhạc</span>
   </button>
 
-  <!-- Audio Element -->
+  <!-- Audio Element (Nhạc Acoustic Guitar Lãng Mạn & Ấm Áp) -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2874/2874-preview.mp3" type="audio/mpeg">
-    <!-- Secondary fallback source -->
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
   <!-- MAIN CONTAINER -->
   <div class="max-w-4xl mx-auto px-4 py-8 md:py-12 relative z-20">
 
-    <!-- HEADER / HERO SECTION -->
+    <!-- HEADER SECTION -->
     <header class="text-center mb-8 md:mb-12">
-      <!-- Zodiac Rooster Mascot Cute Illustration -->
-      <div class="inline-block relative mb-4">
-        <div class="w-28 h-28 md:w-36 md:h-36 bg-gradient-to-tr from-pink-300 to-rose-200 rounded-full flex items-center justify-center shadow-lg mx-auto border-4 border-white animate-float">
-          <!-- Cute Rooster SVG Icon -->
-          <svg class="w-20 h-20 md:w-24 md:h-24 text-rose-500 drop-shadow-md" viewBox="0 0 64 64" fill="currentColor">
-            <!-- Rooster Crown / Comb -->
-            <path d="M30 6 C28 10, 24 8, 24 14 C28 14, 28 18, 32 18 C36 18, 36 14, 40 14 C40 8, 36 10, 34 6 C32 10, 32 6, 30 6 Z" fill="#e11d48"/>
-            <!-- Head & Body -->
-            <path d="M22 28 C22 20, 42 20, 42 28 C42 36, 46 40, 46 48 C46 56, 38 58, 32 58 C26 58, 18 56, 18 48 C18 40, 22 36, 22 28 Z" fill="#fda4af"/>
-            <!-- Face details -->
-            <circle cx="28" cy="26" r="2.5" fill="#1f2937"/>
-            <circle cx="36" cy="26" r="2.5" fill="#1f2937"/>
-            <circle cx="29" cy="25" r="0.8" fill="#ffffff"/>
-            <circle cx="37" cy="25" r="0.8" fill="#ffffff"/>
-            <!-- Beak -->
-            <polygon points="32,28 35,32 29,32" fill="#f59e0b"/>
-            <!-- Wattle (yếm gà) -->
-            <path d="M30 33 C30 37, 34 37, 34 33 Z" fill="#e11d48"/>
-            <!-- Wings -->
-            <path d="M18 36 C12 38, 12 46, 20 46" stroke="#f43f5e" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M46 36 C52 38, 52 46, 44 46" stroke="#f43f5e" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- Sparkles/Cheeks -->
-            <circle cx="25" cy="30" r="2" fill="#f43f5e" opacity="0.5"/>
-            <circle cx="39" cy="30" r="2" fill="#f43f5e" opacity="0.5"/>
-          </svg>
+      <!-- Mascot Container (Monkey & Rooster) -->
+      <div class="flex justify-center items-center gap-4 mb-4">
+        <!-- Monkey (Mẹ) -->
+        <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-tr from-pink-300 to-rose-200 rounded-full flex items-center justify-center shadow-lg border-4 border-white animate-float cursor-pointer hover:scale-110 transition-transform" onclick="mascotClick(event, 'Mẹ Tuổi Khỉ Thông Thái 🐒')">
+          <span class="text-4xl md:text-5xl">🐒</span>
         </div>
-        <span class="absolute -bottom-2 right-2 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center gap-1">
-          <i class="fa-solid fa-crown text-yellow-300 text-xs"></i> Tuổi Dậu Cute
-        </span>
+        <div class="text-rose-400 font-cursive text-3xl font-bold">♥</div>
+        <!-- Rooster (Chị) -->
+        <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-tr from-rose-200 to-pink-300 rounded-full flex items-center justify-center shadow-lg border-4 border-white animate-float cursor-pointer hover:scale-110 transition-transform" style="animation-delay: 1.5s;" onclick="mascotClick(event, 'Chị Tuổi Gà Xinh Đẹp 🐔')">
+          <span class="text-4xl md:text-5xl">🐔</span>
+        </div>
       </div>
 
       <h1 class="font-cursive text-4xl md:text-6xl text-rose-600 font-bold mb-2 drop-shadow-sm">
         Chúc Mừng Ngày 20/10
       </h1>
       <p class="text-rose-500 font-semibold text-lg md:text-xl tracking-wide uppercase">
-        Gửi Tới Hai & Mẹ Yêu Thương ❤️
+        Gửi Tới Mẹ & Chị Yêu Thương ❤️
       </p>
       <div class="w-24 h-1 bg-gradient-to-r from-pink-300 via-rose-400 to-pink-300 mx-auto rounded-full mt-3"></div>
     </header>
 
-    <!-- MAIN CARDS SECTION -->
+    <!-- CARDS SECTION -->
     <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-10">
 
-      <!-- CARD 1: DÀNH TẶNG MẸ -->
+      <!-- CARD 1: DÀNH TẶNG MẸ (TUỔI THÂN / KHỈ 🐒) -->
       <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group">
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-200/50 rounded-full blur-2xl group-hover:bg-pink-300/60 transition-all"></div>
         
         <div class="flex items-center gap-4 mb-4">
-          <div class="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center text-rose-500 text-2xl shadow-inner">
-            <i class="fa-solid fa-heart-pulse animate-pulse"></i>
+          <div class="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+            🐒
           </div>
           <div>
             <h2 class="font-cursive text-3xl font-bold text-rose-600">Dành Tặng Mẹ</h2>
-            <span class="text-xs font-bold text-pink-500 uppercase tracking-wider">Người phụ nữ tuyệt vời nhất</span>
+            <span class="text-xs font-bold text-pink-500 uppercase tracking-wider">Tuổi Thân • Thông Thái & Tần Tảo</span>
           </div>
         </div>
 
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          Nhân ngày Phụ nữ Việt Nam 20/10, con chúc Mẹ luôn tràn đầy sức khỏe, lúc nào cũng vui vẻ, bình an và hạnh phúc bên gia đình mình. Cảm ơn Mẹ đã luôn yêu thương, chăm sóc và là điểm tựa vững chắc nhất cho con!
+          Nhân ngày Phụ nữ Việt Nam 20/10, con chúc Mẹ luôn dồi dào sức khỏe, bình an, nụ cười luôn rạng rỡ trên môi. Cảm ơn Mẹ đã luôn hy sinh, chăm sóc và dành trọn tình yêu thương bao la cho gia đình mình!
         </p>
 
         <div class="bg-rose-50/80 rounded-2xl p-4 border border-rose-100">
           <p class="text-rose-600 font-medium italic text-sm text-center">
-            "Mẹ tuổi Dậu tần tảo siêng năng,<br>Cả đời chăm sóc chẳng hề than van.<br>Chúc Mẹ trẻ đẹp vẹn toàn,<br>Nụ cười luôn nở, rộn ràng niềm vui!" 🌸
+            "Mẹ tuổi Khỉ khéo léo đảm đang,<br>Cả đời vất vả, gian nan chẳng sờn.<br>20/10 chúc Mẹ vui hơn,<br>Sống lâu vạn kỷ, ngát thơm tình người!" 🌸
           </p>
         </div>
       </div>
 
-      <!-- CARD 2: DÀNH TẶNG HAI -->
+      <!-- CARD 2: DÀNH TẶNG CHỊ (TUỔI DẬU / GÀ 🐔) -->
       <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group">
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-rose-200/50 rounded-full blur-2xl group-hover:bg-rose-300/60 transition-all"></div>
 
         <div class="flex items-center gap-4 mb-4">
-          <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-500 text-2xl shadow-inner">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+            🐔
           </div>
           <div>
-            <h2 class="font-cursive text-3xl font-bold text-rose-600">Dành Tặng Hai</h2>
-            <span class="text-xs font-bold text-pink-500 uppercase tracking-wider">Th Thần tiên & Xinh đẹp</span>
+            <h2 class="font-cursive text-3xl font-bold text-rose-600">Dành Tặng Chị</h2>
+            <span class="text-xs font-bold text-pink-500 uppercase tracking-wider">Tuổi Dậu • Xinh Đẹp & Giỏi Giang</span>
           </div>
         </div>
 
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          Chúc Hai 20/10 thật nhiều niềm vui, ngày càng xinh đẹp, rạng rỡ và thành công trong mọi dự định. Chúc Hai luôn giữ vững năng lượng tích cực, gặp thật nhiều may mắn và lúc nào cũng vui tươi như chú gà nhỏ đáng yêu nhé!
+          Chúc Chị gái 20/10 thật nhiều niềm vui, ngày càng xinh đẹp, tươi trẻ và thành công rực rỡ trong công việc cũng như cuộc sống. Chúc Chị luôn giữ vững năng lượng tích cực và gặp thật nhiều may mắn!
         </p>
 
         <div class="bg-pink-50/80 rounded-2xl p-4 border border-pink-100">
           <p class="text-pink-600 font-medium italic text-sm text-center">
-            "Hai tuổi Dậu lanh lợi đáng yêu,<br>Sáng ngời khí chất, vạn người mến yêu.<br>20/10 chúc Hai thật nhiều,<br>Tiền vô như nước, vạn điều như mơ!" ✨
+            "Chị tuổi Gà lanh lợi đáng yêu,<br>Kiêu sa, thanh lịch, vạn người mến yêu.<br>20/10 chúc Chị thật nhiều,<br>Tiền vô như nước, vạn điều như mơ!" ✨
           </p>
         </div>
       </div>
@@ -226,13 +204,13 @@
     <!-- INTERACTIVE GIFT BOX SECTION -->
     <div class="glass-card rounded-3xl p-6 md:p-8 text-center shadow-xl mb-10 border-2 border-pink-300 relative">
       <div class="inline-block bg-rose-500 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest mb-3 shadow">
-        Góc Bất Ngờ
+        Góc Món Quà Yêu Thương
       </div>
-      <h3 class="text-2xl font-bold text-rose-600 mb-2">Món Quà Bí Mật Dành Tặng Hai & Mẹ</h3>
-      <p class="text-gray-600 text-sm mb-6">Nhấn vào hộp quà bên dưới để mở điều ước may mắn 20/10 nhé!</p>
+      <h3 class="text-2xl font-bold text-rose-600 mb-2">Mở Hộp Quà Bí Mật Dành Cho Mẹ & Chị</h3>
+      <p class="text-gray-600 text-sm mb-6">Bấm vào hộp quà bên dưới để nhận lời chúc và điệu nhạc ngọt ngào!</p>
 
       <!-- Gift Box Icon Interactive -->
-      <div id="giftContainer" onclick="openGift()" class="inline-block cursor-pointer transform hover:scale-110 transition-all duration-300 group">
+      <div id="giftContainer" onclick="openGift(event)" class="inline-block cursor-pointer transform hover:scale-110 transition-all duration-300 group">
         <div id="giftBox" class="w-24 h-24 md:w-28 md:h-28 bg-gradient-to-tr from-rose-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-pink-400/50 relative animate-bounce-slow">
           <i class="fa-solid fa-gift text-5xl text-white drop-shadow"></i>
           <span class="absolute -top-2 -right-2 flex h-5 w-5">
@@ -244,56 +222,28 @@
 
       <!-- Secret Wish Output -->
       <div id="wishModal" class="hidden mt-6 p-5 bg-gradient-to-r from-pink-100 via-rose-100 to-pink-100 rounded-2xl border border-pink-300 animate-fadeIn transition-all">
-        <div class="text-3xl mb-2">🎁 ✨ 🌸</div>
+        <div class="text-3xl mb-2">🎁 ✨ 💖 🌸</div>
         <p id="wishText" class="font-cursive text-2xl font-bold text-rose-600 leading-relaxed"></p>
-        <p class="text-xs text-gray-500 mt-2">(Bấm thêm lần nữa vào hộp quà để nhận thêm lời chúc may mắn ngẫu nhiên!)</p>
-      </div>
-    </div>
-
-    <!-- ZODIAC ROOSTER FUN FACTS / WISH WISHES -->
-    <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl text-center">
-      <h3 class="font-cursive text-3xl font-bold text-rose-600 mb-4">
-        <i class="fa-solid fa-feather text-pink-400 mr-2"></i>Vì Sao Tuổi Dậu Luôn Tỏa Sáng?
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left text-sm">
-        <div class="bg-white/60 p-4 rounded-2xl border border-pink-100">
-          <div class="text-rose-500 font-bold mb-1 flex items-center gap-2">
-            <i class="fa-solid fa-sun"></i> Siêng Năng & Chu Đáo
-          </div>
-          <p class="text-gray-600">Giống như chú gà trống đón bình minh, luôn chăm chỉ, tinh tế và quan tâm chu đáo tới mọi người xung quanh.</p>
-        </div>
-        <div class="bg-white/60 p-4 rounded-2xl border border-pink-100">
-          <div class="text-rose-500 font-bold mb-1 flex items-center gap-2">
-            <i class="fa-solid fa-gem"></i> Gu Thẩm Mỹ Xuất Sắc
-          </div>
-          <p class="text-gray-600">Luôn thích sự chỉn chu, rực rỡ và xinh đẹp. Màu hồng chính là sự lựa chọn hoàn hảo mang lại may mắn!</p>
-        </div>
-        <div class="bg-white/60 p-4 rounded-2xl border border-pink-100">
-          <div class="text-rose-500 font-bold mb-1 flex items-center gap-2">
-            <i class="fa-solid fa-heart"></i> Sống Chân Thành
-          </div>
-          <p class="text-gray-600">Luôn dành trọn tình cảm chân thành cho gia đình, mang đến không khí ấm áp và nhiều tiếng cười.</p>
-        </div>
+        <p class="text-xs text-gray-500 mt-2">(Bấm tiếp vào hộp quà để mở thêm nhiều lời chúc may mắn ngẫu nhiên khác!)</p>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="text-center mt-12 text-rose-400 text-sm font-medium">
-      <p>Created with <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> for 20/10 • Dành riêng cho Hai & Mẹ Tuổi Dậu</p>
+      <p>Created with <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> for 20/10 • Dành tặng Mẹ tuổi Khỉ 🐒 & Chị tuổi Gà 🐔</p>
     </footer>
 
   </div>
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Audio Autoplay Setup
     const bgMusic = document.getElementById('bgMusic');
     const musicToggleBtn = document.getElementById('musicToggleBtn');
     const musicIcon = document.getElementById('musicIcon');
     const musicText = document.getElementById('musicText');
     let isPlaying = false;
 
-    // Try auto-play on user first click anywhere on page
+    // Tự động phát nhạc khi chạm tương tác bất kỳ lần đầu
     document.addEventListener('click', function autoPlayOnce() {
       if (!isPlaying) {
         playMusic();
@@ -305,6 +255,7 @@
       bgMusic.play().then(() => {
         isPlaying = true;
         musicIcon.classList.add('animate-spin');
+        musicIcon.style.animationDuration = '4s';
         musicText.innerText = "Tắt Nhạc";
       }).catch(err => {
         console.log("Autoplay blocked, user interaction required");
@@ -322,9 +273,25 @@
       }
     }
 
-    // Falling Petals / Hearts Animation Generator
+    // Floating Pop Text Effect (2.5 giây)
+    function createPopText(x, y, text) {
+      const el = document.createElement('div');
+      el.className = 'pop-text';
+      el.innerText = text;
+      el.style.left = `${x - 40}px`;
+      el.style.top = `${y - 20}px`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2500);
+    }
+
+    function mascotClick(e, text) {
+      createPopText(e.clientX, e.clientY, text);
+      if (!isPlaying) playMusic();
+    }
+
+    // Falling Petals Generator
     const petalsContainer = document.getElementById('petals-container');
-    const petalIcons = ['🌸', '🌺', '💖', '✨', '💕', '🌷'];
+    const petalIcons = ['🌸', '🌺', '💖', '✨', '💕', '🌷', '🐒', '🐔'];
 
     function createPetal() {
       const petal = document.createElement('div');
@@ -344,31 +311,33 @@
 
     // Random Wishes for Interactive Gift Box
     const wishes = [
-      "Chúc Hai & Mẹ luôn trẻ trung, xinh đẹp như tuổi 20!",
-      "Chúc Hai & Mẹ vạn sự như ý, sức khỏe dồi dào, tiền vô ào ạt!",
-      "Chúc gia đình mình lúc nào cũng tràn ngập tiếng cười và hạnh phúc!",
-      "Chúc Hai & Mẹ nhận được thật nhiều hoa, nhiều quà và tình yêu thương trong ngày 20/10!",
-      "Mong mọi điều may mắn và bình an nhất sẽ luôn đồng hành cùng Hai & Mẹ!"
+      "Chúc Mẹ & Chị luôn vui vẻ, tươi trẻ và ngập tràn hạnh phúc trong ngày 20/10!",
+      "Chúc Mẹ tuổi Khỉ luôn dồi dào sức khỏe, chúc Chị tuổi Gà luôn xinh đẹp & vạn sự như ý!",
+      "Chúc gia đình mình luôn tràn ngập tiếng cười, may mắn và tài lộc đong đầy!",
+      "Chúc Mẹ & Chị nhận được thật nhiều hoa, quà và tình yêu thương trọn vẹn!",
+      "Cảm ơn Mẹ và Chị vì đã luôn là những người phụ nữ tuyệt vời nhất trong gia đình!"
     ];
 
-    function openGift() {
+    function openGift(e) {
       const giftBox = document.getElementById('giftBox');
       const wishModal = document.getElementById('wishModal');
       const wishText = document.getElementById('wishText');
 
-      // Add bounce rotation effect
+      if (!isPlaying) playMusic();
+
       giftBox.classList.add('scale-125', 'rotate-12');
       setTimeout(() => {
         giftBox.classList.remove('scale-125', 'rotate-12');
       }, 300);
 
-      // Select random wish
       const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
       wishText.innerText = `"${randomWish}"`;
 
       wishModal.classList.remove('hidden');
 
-      // Burst extra hearts
+      createPopText(e.clientX, e.clientY, "🎁 Mở Quà Yêu Thương!");
+
+      // Bắn thêm hiệu ứng hoa tim rơi
       for(let i = 0; i < 15; i++) {
         setTimeout(createPetal, i * 50);
       }
