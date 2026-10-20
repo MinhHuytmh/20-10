@@ -3,449 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Vanhh 20/10 Dui Dẻee! 🐸❤️</title>
-    <!-- Font chữ lãng mạn & hiện đại -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti cho hiệu ứng pháo hoa -->
+    <title>Gửi Vanhh Xinh Đẹp - 20/10 Rực Rỡ 💖</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        :root {
-            --primary: #ff758c;
-            --secondary: #ff7eb3;
-            --frog-green: #71b85f;
-            --frog-dark: #4d8b3d;
-            --accent: #ffd166;
-            --bg-gradient: linear-gradient(135deg, #fce3ec 0%, #ffe8e8 50%, #e8f5e9 100%);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg-gradient);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe3ec 35%, #e8f5e9 100%);
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
         }
 
-        /* Floating background items */
-        .bg-element {
-            position: absolute;
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 50px rgba(255, 182, 193, 0.4);
+        }
+
+        /* Floating elements background animation */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.6) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-item {
+            position: fixed;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.6;
-            animation: floatSlow 8s infinite ease-in-out;
+            animation: floatUp linear infinite;
         }
 
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-25px) rotate(10deg); }
+        /* Gentle Glow */
+        @keyframes pulseGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.6));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(255, 105, 180, 0.9));
+                transform: scale(1.03);
+            }
         }
 
-        /* Main Container */
-        .card-container {
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            max-width: 450px;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 35px 25px;
-            box-shadow: 0 20px 50px rgba(255, 117, 140, 0.25),
-                        0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-            text-align: center;
-            transition: transform 0.5s ease;
+        .glow-title {
+            animation: pulseGlow 3s infinite ease-in-out;
         }
 
-        .card-container:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Crown Header for Frog */
-        .frog-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-
-        /* Bé ếch nhảy lò co 3s nhịp nhàng */
-        .frog-avatar {
-            font-size: 85px;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
-            animation: frogHop 3s infinite ease-in-out;
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .frog-avatar:active {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .crown {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-5deg);
-            font-size: 38px;
-            animation: crownShimmer 2.5s infinite alternate ease-in-out;
-        }
-
-        @keyframes frogHop {
+        /* Gentle 3-second Frog jump animation */
+        @keyframes frogJump {
             0%, 100% { transform: translateY(0) scale(1); }
-            35% { transform: translateY(-18px) scale(1.05) rotate(-3deg); }
-            70% { transform: translateY(0) scale(0.98); }
+            35% { transform: translateY(-20px) scale(1.06, 0.94); }
+            50% { transform: translateY(0) scale(0.96, 1.04); }
+            70% { transform: translateY(-8px) scale(1.02); }
         }
 
-        @keyframes crownShimmer {
-            0% { transform: translateX(-50%) rotate(-5deg) scale(1); }
-            100% { transform: translateX(-50%) rotate(8deg) scale(1.15); }
+        .animate-frog-jump {
+            animation: frogJump 3s infinite ease-in-out;
         }
 
-        /* Wish Message Style */
-        .title-tag {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3);
-            color: white;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 6px 16px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(255, 117, 140, 0.3);
-        }
-
-        .main-wish {
-            font-family: 'Dancing Script', cursive;
-            font-size: 32px;
-            color: #d63384;
-            line-height: 1.35;
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-
-        .main-wish strong {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            color: #b71c1c;
-            display: block;
-            margin: 5px 0;
-            background: linear-gradient(120deg, #e91e63, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Interactive Buttons */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .btn {
-            border: none;
-            outline: none;
-            padding: 14px 24px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #ff4e6d, #ff65a3);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.4);
-        }
-
-        .btn-secondary {
-            background: #e8f5e9;
-            color: var(--frog-dark);
-            border: 1.5px solid #a5d6a7;
-        }
-
-        .btn-secondary:hover {
-            background: #c8e6c9;
-            transform: translateY(-3px);
-        }
-
-        /* Floating Audio Control */
-        .music-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .music-btn.playing {
-            animation: spinMusic 4s linear infinite;
-        }
-
-        @keyframes spinMusic {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Modal Secret Letter */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease;
-        }
-
-        .modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            max-width: 400px;
-            width: 85%;
-            text-align: center;
-            transform: scale(0.8) translateY(20px);
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1) translateY(0);
-        }
-
-        .close-btn {
+        /* Click Sparkle FX */
+        .click-sparkle {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #f0f0f0;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Pop text effect (2.5s) */
-        .pop-text {
-            position: fixed;
             pointer-events: none;
-            font-weight: bold;
-            font-size: 22px;
-            color: #ff4757;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 9999;
-            animation: popUpFade 2.5s forwards cubic-bezier(0.25, 1, 0.5, 1);
+            animation: popOut 2.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 1.8rem;
         }
 
-        @keyframes popUpFade {
-            0% { opacity: 0; transform: translateY(0) scale(0.5); }
-            20% { opacity: 1; transform: translateY(-30px) scale(1.2); }
-            80% { opacity: 1; transform: translateY(-70px) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(0.8); }
+        @keyframes popOut {
+            0% { opacity: 1; transform: translate(0, 0) scale(0.4); }
+            40% { opacity: 0.9; transform: translate(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7)) scale(1.3); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.6); }
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffe3ec; }
+        ::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 4px; }
     </style>
 </head>
-<body>
+<body class="relative flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 text-gray-800 select-none" onclick="enableAudioOnFirstClick()">
 
-    <!-- Nút Bật/Tắt Nhạc -->
-    <button class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Bật/Tắt nhạc">🎵</button>
-    
-    <!-- Audio Nhạc Thành Đô Drill -->
+    <!-- Ambient Audio Control Button -->
+    <button id="musicToggleBtn" onclick="toggleAudio(event)" class="fixed top-4 right-4 z-50 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-full shadow-xl border-2 border-pink-300 text-pink-600 hover:text-pink-700 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer">
+        <i id="musicIcon" class="fas fa-music text-lg animate-bounce text-pink-500"></i>
+        <span id="musicText" class="text-xs font-bold">Bật Nhạc Yêu Thương 🎶</span>
+    </button>
+
+    <!-- Floating Background Layer -->
+    <div id="floatingContainer" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Main Container Card -->
+    <main class="relative z-10 w-full max-w-2xl glass-card rounded-3xl p-6 sm:p-10 my-6 text-center transition-all duration-700">
+
+        <!-- Cute Frog Mascot Section -->
+        <div class="relative mb-4 inline-block group cursor-pointer" onclick="frogInteraction(event)">
+            <!-- Interactive Frog Emoji Avatar with Crown & Hearts -->
+            <div class="relative w-28 h-28 sm:w-36 sm:h-36 mx-auto bg-gradient-to-tr from-green-200 to-emerald-100 rounded-full flex items-center justify-center border-4 border-pink-300/60 shadow-inner animate-frog-jump">
+                <span class="text-6xl sm:text-7xl transition-transform duration-500 transform group-hover:scale-125">🐸</span>
+                <!-- Mini Crown -->
+                <span class="absolute -top-3 right-4 text-2xl sm:text-3xl rotate-12 transform group-hover:rotate-45 transition-transform duration-500">👑</span>
+                <!-- Blushing Cheek Effects -->
+                <div class="absolute bottom-6 left-5 w-4 h-2 bg-pink-400/50 rounded-full blur-[1px]"></div>
+                <div class="absolute bottom-6 right-5 w-4 h-2 bg-pink-400/50 rounded-full blur-[1px]"></div>
+            </div>
+
+            <div class="mt-2 text-xs font-semibold text-emerald-700 bg-emerald-100/80 px-3 py-1 rounded-full shadow-sm">
+                ✨ Chạm vào bé Ếch xinh nè! ❤️
+            </div>
+        </div>
+
+        <!-- Main Title Highlighted Text -->
+        <div class="mb-6 glow-title">
+            <span class="block text-pink-500 text-base sm:text-lg font-bold tracking-widest uppercase mb-1">
+                🌸 Happy Vietnamese Women's Day 🌸
+            </span>
+            <h1 class="font-dancing text-3xl sm:text-5xl lg:text-6xl text-pink-600 font-bold leading-tight px-2">
+                Chúc Vanhh đẹp gái của anh 20/10 dui dẻee 💖
+            </h1>
+        </div>
+
+        <!-- Romantic Subtitle & Decorator -->
+        <p class="text-gray-600 text-sm sm:text-base mb-8 max-w-md mx-auto leading-relaxed">
+            Hôm nay là ngày của em, chúc công chúa nhỏ lúc nào cũng tươi rói như nụ cười của bé ếch, luôn xinh đẹp, hạnh phúc và luôn là điều ngọt ngào nhất của anh! 🥰✨
+        </p>
+
+        <!-- Interactive Gift Box Trigger -->
+        <div id="giftSection" class="my-6">
+            <button id="openGiftBtn" onclick="openSurpriseBox(event)" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-500 bg-gradient-to-r from-pink-500 via-rose-500 to-emerald-400 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 group overflow-hidden cursor-pointer">
+                <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+                <i class="fas fa-gift text-2xl mr-3 animate-bounce"></i>
+                <span>Bấm Vào Đây Để Nhận Quà 🎁</span>
+            </button>
+        </div>
+
+        <!-- Hidden Surprise Letter -->
+        <div id="surpriseLetter" class="hidden transform scale-90 opacity-0 transition-all duration-1000 ease-out bg-white/90 rounded-2xl p-6 sm:p-8 border-2 border-pink-200 shadow-inner mt-6 text-left relative overflow-hidden">
+            <div class="absolute top-2 right-3 text-pink-200 text-6xl pointer-events-none opacity-40 font-serif">💕</div>
+            <h3 class="font-playfair text-xl sm:text-2xl font-bold text-pink-600 mb-3 flex items-center gap-2">
+                <span>💌 Đôi Lời Tình Cảm Gửi Vanhh</span>
+            </h3>
+            <div class="space-y-3 text-gray-700 text-sm sm:text-base leading-relaxed">
+                <p>Gửi <b>Vanhh</b> cực kỳ đáng yêu của anh,</p>
+                <p>Cảm ơn em đã xuất hiện và làm cho thế giới của anh trở nên ngập tràn màu sắc. Nhân ngày 20/10, anh chúc Vanhh không chỉ ngày hôm nay mà cả 365 ngày trong năm đều vạn sự như ý, luôn được yêu thương và vui vẻ nhất nhé! 🐸✨</p>
+                <p>Mong em luôn giữ mãi nụ cười rạng rỡ và tự tin. Yêu Vanhh đẹp gái nhất trên đời! 💖🎉</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-pink-100 flex justify-between items-center text-xs text-pink-500 font-semibold">
+                <span>From: Chàng trai của Vanhh 🧑‍🌾❤️</span>
+                <span>20/10/2026 🎈</span>
+            </div>
+        </div>
+
+        <!-- Interactive Action Buttons -->
+        <div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-semibold">
+            <button onclick="spawnHearts(event)" class="px-4 py-2.5 rounded-xl bg-pink-100 text-pink-600 hover:bg-pink-200 transition-colors shadow-sm flex items-center gap-2 cursor-pointer">
+                <span>💖 Bắn Tim Cho Vanhh</span>
+            </button>
+            <button onclick="frogRibbit(event)" class="px-4 py-2.5 rounded-xl bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition-colors shadow-sm flex items-center gap-2 cursor-pointer">
+                <span>🐸 Ếch Kêu "Ò E Ò"</span>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer Copyright Note -->
+    <footer class="relative z-10 text-center text-xs text-pink-600/80 mt-2 font-medium">
+        Làm riêng tặng Vanhh đẹp gái ✨ 20/10 Sweet Memory 🐸
+    </footer>
+
+    <!-- Audio Element (Nhạc piano acoustic lãng mạn) -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="thanh-do-drill.mp3" type="audio/mpeg">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112188.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Các họa tiết nền lơ lửng -->
-    <div class="bg-element" style="top: 10%; left: 8%; font-size: 35px;">🐸</div>
-    <div class="bg-element" style="top: 70%; left: 5%; font-size: 40px; animation-delay: 1s;">🌸</div>
-    <div class="bg-element" style="top: 15%; right: 10%; font-size: 38px; animation-delay: 2s;">💖</div>
-    <div class="bg-element" style="top: 75%; right: 8%; font-size: 35px; animation-delay: 3s;">🐸</div>
-
-    <!-- Khung Card Chính -->
-    <div class="card-container">
-        <div class="title-tag">Special Day • 20/10</div>
-        
-        <div class="frog-wrapper" onclick="frogClick(event)">
-            <span class="crown">👑</span>
-            <div class="frog-avatar">🐸</div>
-        </div>
-
-        <div class="main-wish">
-            Chúc <strong>Vanhh đẹp gái</strong> của anh 20/10 dui dẻee! ✨
-        </div>
-
-        <div class="btn-group">
-            <button class="btn btn-primary" onclick="openGift()">
-                🎁 Bấm Vào Đây Để Nhận Quà
-            </button>
-            <button class="btn btn-secondary" onclick="shootHearts(event)">
-                💚 Chạm Bé Ếch Thả Tim (2-3s)
-            </button>
-        </div>
-    </div>
-
-    <!-- Hộp Thư Bí Mật -->
-    <div class="modal" id="giftModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeGift()">×</button>
-            <div style="font-size: 50px; margin-bottom: 10px;">👑🐸💖</div>
-            <h3 style="color: #d63384; font-size: 22px; margin-bottom: 12px; font-family: 'Playfair Display', serif;">
-                Gửi Vanhh Dễ Thương!
-            </h3>
-            <p style="color: #555; line-height: 1.6; font-size: 15px; margin-bottom: 15px;">
-                Chúc em ngày 20/10 luôn tràn ngập niềm vui, xinh đẹp rạng rỡ và luôn dui dẻee bên anh nhé! Cảm ơn Vanhh vì đã xuất hiện và làm mọi khoảnh khắc trở nên ngọt ngào hơn. 💕
-            </p>
-            <div style="font-size: 26px;">✨🌸🐸🎉✨</div>
-        </div>
-    </div>
-
     <script>
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicToggle');
+        // --- Background Floating Elements ---
+        const floatingContainer = document.getElementById('floatingContainer');
+        const floatItems = ['🐸', '💖', '🌸', '✨', '💕', '🌷', '🐸', '🎀'];
+
+        function createFloatingItem() {
+            const item = document.createElement('div');
+            item.className = 'floating-item';
+            item.innerText = floatItems[Math.floor(Math.random() * floatItems.length)];
+            
+            const startLeft = Math.random() * 100;
+            const duration = 10 + Math.random() * 6;
+            const fontSize = 1.3 + Math.random() * 1.5;
+
+            item.style.left = `${startLeft}vw`;
+            item.style.animationDuration = `${duration}s`;
+            item.style.fontSize = `${fontSize}rem`;
+
+            floatingContainer.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createFloatingItem, 600);
+
+        // --- Audio Management ---
+        const audio = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
         let isPlaying = false;
+        let hasInteracted = false;
 
-        function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.classList.remove('playing');
-                musicBtn.innerText = '🔇';
-            } else {
-                bgMusic.play().catch(e => console.log('Auto-play blocked'));
-                musicBtn.classList.add('playing');
-                musicBtn.innerText = '🎵';
+        function startAudio() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    musicIcon.className = 'fas fa-compact-disc text-lg animate-spin text-pink-500';
+                    musicText.innerText = 'Đang Phát Nhạc 🎶';
+                    isPlaying = true;
+                }).catch((e) => {
+                    console.log("Audio play blocked until click:", e);
+                });
             }
-            isPlaying = !isPlaying;
         }
 
-        // Tự động kéo dài thời gian pháo hoa & tim lơ lửng 2.5 - 3 giây
-        function shootConfetti() {
-            const duration = 2800; // 2.8 giây
-            const animationEnd = Date.now() + duration;
-
-            (function frame() {
-                const timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return;
-
-                confetti({
-                    particleCount: 3,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff758c', '#71b85f', '#ffd166', '#ffffff'],
-                    ticks: 300,
-                    gravity: 0.7
-                });
-                confetti({
-                    particleCount: 3,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff758c', '#71b85f', '#ffd166', '#ffffff'],
-                    ticks: 300,
-                    gravity: 0.7
-                });
-
-                requestAnimationFrame(frame);
-            }());
+        function enableAudioOnFirstClick() {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                startAudio();
+            }
         }
 
-        function openGift() {
-            document.getElementById('giftModal').classList.add('active');
-            shootConfetti();
-            if (!isPlaying) toggleMusic();
+        function toggleAudio(event) {
+            if (event) event.stopPropagation();
+            hasInteracted = true;
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.className = 'fas fa-music text-lg text-pink-500';
+                musicText.innerText = 'Bật Nhạc Yêu Thương 🎶';
+                isPlaying = false;
+            } else {
+                startAudio();
+            }
         }
 
-        function closeGift() {
-            document.getElementById('giftModal').classList.remove('active');
-        }
-
-        // Hiệu ứng chữ nổi 2.5 giây khi bấm
-        function createPopText(x, y, text) {
-            const el = document.createElement('div');
-            el.className = 'pop-text';
-            el.innerText = text;
-            el.style.left = `${x - 40}px`;
-            el.style.top = `${y - 20}px`;
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 2500);
-        }
-
-        function frogClick(e) {
-            const messages = ["Ếch ộp! 🐸", "Vanhh Siêu Đẹp Gái! ✨", "Yêu Vanhh Dui Dẻee! ❤️", "👑 Chú Ếch Hoàng Tử"];
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-            createPopText(e.clientX, e.clientY, randomMsg);
-            
+        // --- Interactive Reactions ---
+        function frogInteraction(event) {
+            startAudio();
             confetti({
-                particleCount: 25,
+                particleCount: 35,
                 spread: 70,
-                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
-                colors: ['#71b85f', '#ff758c'],
                 ticks: 250,
-                gravity: 0.6
+                gravity: 0.6,
+                origin: { 
+                    x: event.clientX / window.innerWidth, 
+                    y: event.clientY / window.innerHeight 
+                },
+                colors: ['#4ade80', '#f472b6', '#fbbf24', '#38bdf8']
             });
+
+            const textOptions = ['Cười cái nào! 🐸', 'Vanhh Đẹp Gái! ✨', 'Anh Yêu Em! 💕', 'Ribbit Ribbit! 💚'];
+            const randomText = textOptions[Math.floor(Math.random() * textOptions.length)];
+            createFloatingPopText(event.clientX, event.clientY, randomText);
         }
 
-        function shootHearts(e) {
-            const emojis = ['💚', '🐸', '💖', '✨', '🌸'];
-            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-            createPopText(e.clientX, e.clientY, randomEmoji + " 20/10 Dui Dẻee!");
-            
+        function frogRibbit(event) {
+            startAudio();
             confetti({
-                particleCount: 30,
-                spread: 80,
-                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
-                colors: ['#ff758c', '#ff7eb3', '#71b85f'],
-                ticks: 280,
-                gravity: 0.5
+                particleCount: 65,
+                angle: 90,
+                spread: 90,
+                ticks: 300,
+                gravity: 0.5,
+                origin: { y: 0.6 },
+                colors: ['#22c55e', '#86efac', '#f472b6', '#f43f5e']
             });
+
+            createFloatingPopText(window.innerWidth / 2, window.innerHeight / 2, 'Ếch kêu: "Vanhh ơi, vui vẻ nha!" 🐸💖');
+        }
+
+        function createFloatingPopText(x, y, text) {
+            const el = document.createElement('div');
+            el.className = 'fixed z-50 text-pink-600 font-bold bg-white/95 px-4 py-2 rounded-full shadow-lg text-sm sm:text-base pointer-events-none transform -translate-x-1/2 -translate-y-1/2 transition-all duration-[2500ms] ease-out';
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+            el.innerText = text;
+
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.style.transform = 'translate(-50%, -140px) scale(1.15)';
+                el.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => {
+                el.remove();
+            }, 2550);
+        }
+
+        // --- Open Surprise Gift Box ---
+        let isOpened = false;
+        function openSurpriseBox(event) {
+            if (event) event.stopPropagation();
+            startAudio();
+
+            const giftBtn = document.getElementById('openGiftBtn');
+            const letter = document.getElementById('surpriseLetter');
+
+            if (!isOpened) {
+                isOpened = true;
+                
+                const duration = 3000;
+                const animationEnd = Date.now() + duration;
+
+                const interval = setInterval(function() {
+                    const timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+                    const particleCount = 20 * (timeLeft / duration);
+                    confetti({
+                        particleCount,
+                        startVelocity: 30,
+                        spread: 360,
+                        ticks: 200,
+                        gravity: 0.7,
+                        origin: { x: Math.random(), y: Math.random() - 0.2 },
+                        colors: ['#ec4899', '#f43f5e', '#10b981', '#fbbf24', '#a855f7']
+                    });
+                }, 250);
+
+                letter.classList.remove('hidden');
+                setTimeout(() => {
+                    letter.classList.remove('scale-90', 'opacity-0');
+                    letter.classList.add('scale-100', 'opacity-100');
+                }, 100);
+
+                giftBtn.innerHTML = '<i class="fas fa-heart text-2xl mr-2 text-pink-200"></i><span>Món Quà Dành Cho Vanhh ✨</span>';
+                giftBtn.classList.remove('from-pink-500', 'via-rose-500', 'to-emerald-400');
+                giftBtn.classList.add('from-emerald-500', 'to-pink-500');
+            } else {
+                confetti({ particleCount: 50, spread: 80, ticks: 250, origin: { y: 0.7 } });
+            }
+        }
+
+        // --- Spawn Heart Burst ---
+        function spawnHearts(event) {
+            startAudio();
+            for (let i = 0; i < 10; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'click-sparkle';
+                sparkle.innerText = Math.random() > 0.35 ? '💖' : '🐸';
+                
+                const dx = (Math.random() - 0.5) * 220 + 'px';
+                const dy = (Math.random() - 0.8) * 220 + 'px';
+                
+                sparkle.style.setProperty('--dx', dx);
+                sparkle.style.setProperty('--dy', dy);
+                sparkle.style.left = (event.clientX || window.innerWidth / 2) + 'px';
+                sparkle.style.top = (event.clientY || window.innerHeight / 2) + 'px';
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 2500);
+            }
         }
     </script>
 </body>
